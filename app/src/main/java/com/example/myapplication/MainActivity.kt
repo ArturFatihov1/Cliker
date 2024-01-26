@@ -37,14 +37,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 
-/*
-verticalArrangement = Arrangement.SpaceAround - у объекта с верху и с низу одинаковое расстояние ( с отступами) (-a-a-a-)
-verticalArrangement = Arrangement.SpaceBetween - у объекта одинаковое расстояние от друг друга, без отступа (а--а--а)
-verticalArrangement = Arrangement.SpaceEvenly -  3 отрезка одинаковой длины (-.а-а-а.-)
-vertical Arrangement  and horizintal Alignement когда Column
-vertical Alignement  and horizintal Arrangement когда Row
-shape = CircleShape - круглая форма
- */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +54,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun CircleItem(){
+fun CircleItem() {
     var counter = remember {
         mutableStateOf(0)
     }
@@ -71,24 +63,44 @@ fun CircleItem(){
     }
     Box(
         modifier = Modifier
-            .size(140.dp)
-            .background(color = color.value, shape = CircleShape)
-            .clickable {
-                when(++counter.value){
-                    10 -> color.value = Color.Red
-                    20 -> color.value = Color.Green
-                    30 -> color.value = Color.Black
-                    40 -> color.value = Color.DarkGray
-                    50 -> color.value = Color.Yellow
-                    60 -> color.value = Color.Magenta
-                } },
-            contentAlignment = Alignment.Center
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+
+        Image(
+            painter = painterResource(id = R.drawable.image6),
+            contentDescription = "Image",
+            contentScale = ContentScale.Crop,
+            alpha = 0.7F
+        )
+        Column (modifier = Modifier, verticalArrangement = Arrangement.Center){
+            Text(text = "Нажми на шарик", modifier = Modifier.padding(bottom = 15.dp),
+                style = TextStyle(fontSize = 19.sp, fontWeight = FontWeight.Bold)
+            )
+            Box(
+                modifier = Modifier
+                    .size(140.dp)
+                    .background(color = color.value, shape = CircleShape)
+                    .clickable {
+                        when (++counter.value) {
+                            10 -> color.value = Color.Red
+                            20 -> color.value = Color.Green
+                            30 -> color.value = Color.Black
+                            40 -> color.value = Color.DarkGray
+                            50 -> color.value = Color.LightGray
+                            60 -> color.value = Color.Magenta
+                        }
+                    },
+                contentAlignment = Alignment.Center
 
 
-    ){
-        Text(text = counter.value.toString(),
-            style = TextStyle(color = Color.White , fontSize = 50.sp))
+            ) {
+                Text(
+                    text = counter.value.toString(),
+                    style = TextStyle(color = Color.White, fontSize = 40.sp)
+                )
+            }
+        }
     }
 }
-//dfdsgdsgdfgfdhfdhfdhf//
 
