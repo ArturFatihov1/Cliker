@@ -55,6 +55,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CircleItem() {
+    var rnd = (1..8).random()
     var counter = remember {
         mutableStateOf(0)
     }
@@ -82,14 +83,19 @@ fun CircleItem() {
                     .size(140.dp)
                     .background(color = color.value, shape = CircleShape)
                     .clickable {
-                        when (++counter.value) {
-                            10 -> color.value = Color.Red
-                            20 -> color.value = Color.Green
-                            30 -> color.value = Color.Black
-                            40 -> color.value = Color.DarkGray
-                            50 -> color.value = Color.LightGray
-                            60 -> color.value = Color.Magenta
-                        }
+                        if ((counter.value + 1) % 10 == 0) {
+                            when(rnd){
+                                1 -> color.value = Color.Red
+                                2 -> color.value = Color.Green
+                                3 -> color.value = Color.Black
+                                4 -> color.value = Color.DarkGray
+                                5 -> color.value = Color.LightGray
+                                6 -> color.value = Color.Magenta
+                                7 -> color.value = Color.Cyan
+                                8 -> color.value = Color.Yellow
+                            }
+                            counter.value++
+                        }else counter.value++
                     },
                 contentAlignment = Alignment.Center
 
